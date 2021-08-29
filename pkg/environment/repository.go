@@ -1,4 +1,4 @@
-package models
+package environment
 
 import "fmt"
 
@@ -15,5 +15,5 @@ func (rl *RepositoryList) GetByTag(tag string) (Repository, error) {
 			return repo, nil
 		}
 	}
-	return Repository{}, fmt.Errorf("tag '%v' not found", tag)
+	return Repository{}, fmt.Errorf("repository tag '%v' not found", tag)
 }

@@ -1,15 +1,16 @@
-package cmds
+package commands
 
 import (
 	"fmt"
-	"mcmodlib/models"
-	"mcmodlib/shared"
+	"mcmodlib/pkg/command"
+	"mcmodlib/pkg/environment"
+	"mcmodlib/pkg/utils"
 	"path/filepath"
 
 	"github.com/tinytengu/go-argparse"
 )
 
-var HandlerCmd = models.Command{
+var HandlerCmd = command.Command{
 	Name: "init",
 	Desc: "Initialize modding environment",
 	Args: argparse.ArgsList{
@@ -23,19 +24,11 @@ var HandlerCmd = models.Command{
 	Handler: handler,
 }
 
-func handler(cmd models.Command, args argparse.ParseResult) {
-	// Determine initialization path (cwd or passed)
+func handler(cmd command.Command, args argparse.ParseResult) {
 	initPath, _ := filepath.Abs(args.Args[0])
-	// var initPath string
-	// if len(args.Args) == 0 {
-	// 	initPath, _ = filepath.Abs(".")
-	// } else {
-	// 	initPath = args.Args[0]
-	// }
+	env := environment.NewEnvironment(initPath)
 
-	env := models.NewEnvironment(initPath)
-
-	if shared.IsFileExists(env.GetConfigPath()) {
+	if utils.IsFileExists(env.GetConfigPath()) {
 		fmt.Printf("Modding environment in folder '%v' already exists\n", initPath)
 		return
 	}

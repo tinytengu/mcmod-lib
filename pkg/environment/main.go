@@ -1,7 +1,7 @@
-package models
+package environment
 
 import (
-	"mcmodlib/shared"
+	"mcmodlib/pkg/utils"
 	"os"
 	"path"
 
@@ -47,7 +47,7 @@ func (env *Environment) Write() error {
 		return err
 	}
 
-	err = shared.WriteFile(env.GetConfigPath(), data)
+	err = utils.WriteFile(env.GetConfigPath(), data)
 	if err != nil {
 		return err
 	}
@@ -55,7 +55,7 @@ func (env *Environment) Write() error {
 }
 
 func (env *Environment) Read() error {
-	data, err := shared.ReadFile(env.GetConfigPath())
+	data, err := utils.ReadFile(env.GetConfigPath())
 	if err != nil {
 		return err
 	}
