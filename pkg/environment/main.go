@@ -23,12 +23,13 @@ type Storage struct {
 func NewEnvironment(dirPath string) Environment {
 	env := Environment{}
 
+	env.configFile = "mcmod.yaml"
 	env.path = dirPath
+
 	env.Properties = PropertiesList{}
 	env.Repositories = RepositoryList{}
 	env.Mods = []Mod{}
 
-	env.configFile = "mcmod.yaml"
 	return env
 }
 

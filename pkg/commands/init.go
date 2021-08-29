@@ -10,7 +10,8 @@ import (
 	"github.com/tinytengu/go-argparse"
 )
 
-var HandlerCmd = command.Command{
+// 'init' command
+var InitCommand = command.Command{
 	Name: "init",
 	Desc: "Initialize modding environment",
 	Args: argparse.ArgsList{
@@ -24,6 +25,7 @@ var HandlerCmd = command.Command{
 	Handler: handler,
 }
 
+// Command handler
 func handler(cmd command.Command, args argparse.ParseResult) {
 	initPath, _ := filepath.Abs(args.Args[0])
 	env := environment.NewEnvironment(initPath)

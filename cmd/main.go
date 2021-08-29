@@ -10,11 +10,13 @@ import (
 	"github.com/tinytengu/go-argparse"
 )
 
+// Console commands list
 var commandsList = []command.Command{
-	commands.HandlerCmd,
+	commands.InitCommand,
 }
 
 func main() {
+	// No commands or --help
 	if len(os.Args) == 1 || len(os.Args) == 2 && os.Args[1] == "--help" {
 		fmt.Println("Usage: mcmod <command> <args>")
 
@@ -25,6 +27,7 @@ func main() {
 		return
 	}
 
+	// Command passed
 	for _, cmd := range commandsList {
 		if cmd.Name == os.Args[1] {
 			argsSet := argparse.ArgsSet{
