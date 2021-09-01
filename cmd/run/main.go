@@ -12,6 +12,7 @@ import (
 var commandsList = []command.Command{
 	commands.InitCommand,
 	commands.InstallCommand,
+	commands.ListCommand,
 }
 
 func main() {
