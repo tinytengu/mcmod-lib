@@ -14,13 +14,21 @@ func IsValidModEntry(entry string) bool {
 }
 
 func IsValidModsList(data string) (bool, error) {
-	for _, line := range strings.Split(data, "\n") {
-		if len(strings.TrimSpace(line)) == 0 {
-			continue
-		}
+	for _, line := range ParseModEntries(data) {
 		if !IsValidModEntry(line) {
 			return false, fmt.Errorf("invalid mod entry: %v", line)
 		}
 	}
 	return true, nil
+}
+
+func ParseModEntries(data string) []string {
+	var result []string
+	for _, v := range strings.Split(data, "\n") {
+		if len(strings.TrimSpace(v)) == 0 {
+			continue
+		}
+		result = append(result, v)
+	}
+	return result
 }

@@ -33,6 +33,10 @@ func (env *Environment) GetConfigPath() string {
 	return path.Join(env.path, env.configFile)
 }
 
+func (env *Environment) GetPath() string {
+	return env.path
+}
+
 func (env *Environment) Write() error {
 	data, err := yaml.Marshal(&env.Storage)
 	if err != nil {

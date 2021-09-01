@@ -83,12 +83,7 @@ var InstallCommand = command.Command{
 				log.Fatal(err)
 				return
 			}
-			for _, v := range strings.Split(string(data), "\n") {
-				if len(strings.TrimSpace(v)) == 0 {
-					continue
-				}
-				selectors = append(selectors, v)
-			}
+			selectors = utils.ParseModEntries(string(data))
 		} else {
 			selectors = args.Args
 		}
