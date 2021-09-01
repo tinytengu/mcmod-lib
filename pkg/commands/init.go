@@ -47,23 +47,21 @@ func handler(cmd command.Command, args argparse.ParseResult) {
 		return
 	}
 
-	mcVer := args.Flags["mcver"]
-	if mcVer != "" {
-		if !utils.IsValidMcVersion(mcVer) {
-			fmt.Printf("Invalid Minecraft version: %v\n", mcVer)
-		} else {
-			env.Storage.Properties["mcver"] = mcVer
-		}
-	}
+	env.Storage.ValidateStringFlag(
+		args.Flags,
+		"mcver",
+		utils.IsValidMcVersion,
+		env.Storage.Properties,
+		fmt.Sprintf("Invalid Minecraft version: %v\n", args.Flags["mcver"]),
+	)
 
-	modType := args.Flags["modtype"]
-	if modType != "" {
-		if !utils.IsValidModType(modType) {
-			fmt.Printf("Invalid mod type: %v\n", modType)
-		} else {
-			env.Storage.Properties["modtype"] = modType
-		}
-	}
+	env.Storage.ValidateStringFlag(
+		args.Flags,
+		"modtype",
+		utils.IsValidModType,
+		env.Storage.Properties,
+		fmt.Sprintf("Invalid mod type: %v\n", args.Flags["modtype"]),
+	)
 
 	env.Write()
 	fmt.Printf("Modding environment initialized in '%v' folder\n", initPath)
