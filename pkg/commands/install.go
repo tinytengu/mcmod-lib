@@ -2,11 +2,13 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"mcmodlib/pkg/command"
 	"mcmodlib/pkg/environment"
 	"mcmodlib/pkg/utils"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/tinytengu/go-argparse"
 	"github.com/tinytengu/go-cfapi"
@@ -21,10 +23,15 @@ var InstallCommand = command.Command{
 			"mods": {
 				Desc:     "Mods list",
 				Default:  "",
-				Optional: false,
+				Optional: true,
 			},
 		},
 		Flags: argparse.FlagsList{
+			"r": {
+				Desc:     "Mods list reference file",
+				Default:  "",
+				Optional: true,
+			},
 			"env": {
 				Desc:     "Environment path",
 				Default:  ".",
@@ -33,6 +40,17 @@ var InstallCommand = command.Command{
 		},
 	},
 	Handler: func(cmd command.Command, args argparse.ParseResult) {
+		// REFACTOR: Make it prettier pls
+		if len(args.Flags["r"]) == 0 && len(args.Args[0]) == 0 {
+			keys := make([]string, 0, len(cmd.Parameters.Args))
+			for k := range cmd.Parameters.Args {
+				keys = append(keys, k)
+			}
+
+			fmt.Printf("* `%v` argument required\n", keys[0])
+			return
+		}
+
 		// Initialize environment structure
 		envPath, _ := filepath.Abs(args.Flags["env"])
 		env := environment.NewEnvironment(envPath)
@@ -47,9 +65,36 @@ var InstallCommand = command.Command{
 		// Initialize CurseForge API
 		api := cfapi.NewApi()
 		installed := 0
+		var selectors []string
+
+		refFile := args.Flags["r"]
+		if len(refFile) != 0 {
+			if !utils.IsFileExists(refFile) {
+				fmt.Printf("File '%v' not found\n", refFile)
+				return
+			}
+			data, err := utils.ReadFile(refFile)
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			_, err = utils.IsValidModsList(string(data))
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			for _, v := range strings.Split(string(data), "\n") {
+				if len(strings.TrimSpace(v)) == 0 {
+					continue
+				}
+				selectors = append(selectors, v)
+			}
+		} else {
+			selectors = args.Args
+		}
 
 		// Cycle through all passed mods
-		for _, selector := range args.Args {
+		for _, selector := range selectors {
 			sel := utils.ParseSelector(selector)
 			if len(sel.Id) == 0 {
 				fmt.Printf("Error: invalid mod id '%v'", sel.Id)
