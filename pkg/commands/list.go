@@ -19,7 +19,7 @@ var ListCommand = command.Command{
 			"path": {
 				Desc:     "Envronment path",
 				Default:  ".",
-				Optional: false,
+				Optional: true,
 			},
 		},
 		Flags: argparse.FlagsList{},
