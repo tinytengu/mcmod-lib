@@ -103,8 +103,8 @@ var InstallCommand = command.Command{
 			if len(env.Properties["mcver"]) != 0 && len(sel.Version) == 0 {
 				sel.Version = env.Properties["mcver"]
 			}
-			if len(env.Properties["modtype"]) != 0 && len(sel.Type) == 0 {
-				sel.Type = env.Properties["modtype"]
+			if len(env.Properties["type"]) != 0 && len(sel.Type) == 0 {
+				sel.Type = env.Properties["type"]
 			}
 
 			// Get mod from CurseForge

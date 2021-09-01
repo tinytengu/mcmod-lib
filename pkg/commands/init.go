@@ -28,7 +28,7 @@ var InitCommand = command.Command{
 				Default:  "",
 				Optional: true,
 			},
-			"modtype": {
+			"type": {
 				Desc:     "Default mod type (alpha, beta, release)",
 				Default:  "",
 				Optional: true,
@@ -54,9 +54,9 @@ var InitCommand = command.Command{
 
 		// Validate 'modtype' flag
 		env.Storage.Properties.ValidateFlag(
-			args.Flags, "modtype",
+			args.Flags, "type",
 			utils.IsValidModType,
-			fmt.Sprintf("Invalid mod type: %v\n", args.Flags["modtype"]),
+			fmt.Sprintf("Invalid mod type: %v\n", args.Flags["type"]),
 		)
 
 		env.Write()
