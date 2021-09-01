@@ -14,7 +14,7 @@ func (pl *PropertiesList) Validate(value string, assignKey string, validateFunc 
 	// Validate value using validator
 	valid := validator.Validate(value)
 	// If valid, write out to PropertiesList
-	if valid {
+	if valid && len(value) != 0 {
 		(*pl)[assignKey] = value
 	}
 }
