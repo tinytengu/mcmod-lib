@@ -113,11 +113,12 @@ var InstallCommand = command.Command{
 				fmt.Printf("Error (%v): %v\n", sel.Id, err)
 				continue
 			}
+			modId := utils.SliceLast(strings.Split(mod.Urls.Curseforge, "/"))
 
 			// Filter mod files
 			files := utils.FilterModFiles(mod, sel)
 			if len(files) == 0 {
-				fmt.Printf("Error (%v): no matching files found\n", sel.Id)
+				fmt.Printf("Error (%v): no matching files found\n", modId)
 				continue
 			}
 			file := files[0]
@@ -126,27 +127,29 @@ var InstallCommand = command.Command{
 
 			// Delete old .jar file
 			modIdx, envMod := env.Mods.GetById(sel.Id)
-			os.Remove(filepath.Join(envPath, envMod.File))
+			if modIdx != -1 {
+				os.Remove(filepath.Join(envPath, envMod.File))
+			}
 
 			// Download .jar file directly to the environment folder
 			cdn := file.GetCDN()
 			err = utils.DownloadFile(cdn, filepath.Join(envPath, file.Display))
 			if err != nil {
-				fmt.Printf("Error (%v): %v\n", sel.Id, err)
+				fmt.Printf("Error (%v): %v\n", modId, err)
 				continue
 			}
 
 			if modIdx == -1 {
 				// Add mod to the environment
 				env.Mods = append(env.Mods, environment.Mod{
-					Id:    sel.Id,
+					Id:    modId,
 					Mcver: file.Version,
 					Type:  file.Type,
 					File:  file.Display,
 				})
 			} else {
 				// Update mod environment properties
-				env.Mods[modIdx].Id = sel.Id
+				env.Mods[modIdx].Id = modId
 				env.Mods[modIdx].Mcver = file.Version
 				env.Mods[modIdx].Type = file.Type
 				env.Mods[modIdx].File = file.Display
