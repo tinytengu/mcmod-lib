@@ -15,14 +15,16 @@ type Environment struct {
 }
 
 func NewEnvironment(dirPath string) Environment {
-	env := Environment{}
+	env := Environment{
+		configFile: "mcmod.yaml",
+		path:       dirPath,
+	}
 
-	env.configFile = "mcmod.yaml"
-	env.path = dirPath
-
-	env.Properties = PropertiesList{}
-	env.Repositories = RepositoryList{}
-	env.Mods = []Mod{}
+	env.Storage = Storage{
+		Properties:   PropertiesList{},
+		Repositories: RepositoryList{},
+		Mods:         []Mod{},
+	}
 
 	return env
 }
