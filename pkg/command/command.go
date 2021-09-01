@@ -7,18 +7,15 @@ import (
 )
 
 type Command struct {
-	Name    string
-	Desc    string
-	Args    argparse.ArgsList
-	Handler CommandHandler
+	Name       string
+	Desc       string
+	Parameters argparse.Parameters
+	Handler    CommandHandler
 }
 
 func (cmd *Command) Print() {
 	fmt.Printf("%v - %v\n\n", cmd.Name, cmd.Desc)
-	argsSet := (argparse.ArgsSet{
-		Args: cmd.Args,
-	})
-	argsSet.Print()
+	cmd.Parameters.Print()
 }
 
 func (cmd *Command) PrintInline() {

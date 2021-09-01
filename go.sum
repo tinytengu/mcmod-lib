@@ -2,6 +2,16 @@ github.com/tinytengu/go-argparse v0.2.2 h1:UZS1LmbVF6yVGbPTLVHNX502o/8gxkZkHUx/V
 github.com/tinytengu/go-argparse v0.2.2/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
 github.com/tinytengu/go-argparse v1.0.0 h1:2N5ph6h++pQwk9XmxLWIbByTsjGdFSr6xNhYOyKv3cQ=
 github.com/tinytengu/go-argparse v1.0.0/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
+github.com/tinytengu/go-argparse v1.0.1 h1:y06vz/vL+7cEJOPoWijuy7py3Zjd9E2W7WitlTi8wUg=
+github.com/tinytengu/go-argparse v1.0.1/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
+github.com/tinytengu/go-argparse v1.0.2 h1:qZydRg8XU2aJOhKckhDu2+H/1eXX9u4hFsv11l1WRaY=
+github.com/tinytengu/go-argparse v1.0.2/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
+github.com/tinytengu/go-argparse v1.0.3 h1:EJ65CIqbOaooLOrIFvOjwFCmveQIXdxQXEbqlE7zWOU=
+github.com/tinytengu/go-argparse v1.0.3/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
+github.com/tinytengu/go-argparse v1.0.4 h1:3JMY5ivtg0ZMY+EH8nHmCsKRIsY0eqSQv+M/lfv5uWQ=
+github.com/tinytengu/go-argparse v1.0.4/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
+github.com/tinytengu/go-argparse v1.0.5 h1:0dbWG6MrEScF/XZr8qDncxcxsWDINOebxxywKfg2Y6Y=
+github.com/tinytengu/go-argparse v1.0.5/go.mod h1:lSp4CZakBvLY7VMGSqAnaKn2D4yFyLtJcPRKJbDrwxY=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.4.0 h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=

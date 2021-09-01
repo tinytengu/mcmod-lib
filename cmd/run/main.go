@@ -6,8 +6,6 @@ import (
 	"mcmodlib/pkg/commands"
 	"os"
 	"strings"
-
-	"github.com/tinytengu/go-argparse"
 )
 
 // Console commands list
@@ -30,10 +28,7 @@ func main() {
 	// Command passed
 	for _, cmd := range commandsList {
 		if cmd.Name == os.Args[1] {
-			argsSet := argparse.ArgsSet{
-				Args: cmd.Args,
-			}
-			result, err := argsSet.Parse(strings.Join(os.Args[2:], " "))
+			result, err := cmd.Parameters.Parse(strings.Join(os.Args[2:], " "))
 			if err != nil {
 				fmt.Printf("* %v\n\n", err)
 				cmd.Print()

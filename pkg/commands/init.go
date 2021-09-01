@@ -14,24 +14,25 @@ import (
 var InitCommand = command.Command{
 	Name: "init",
 	Desc: "Initialize modding environment",
-	Args: argparse.ArgsList{
-		"path": {
-			Desc:     "Initialization path",
-			Default:  ".",
-			Optional: false,
-			Flag:     false,
+	Parameters: argparse.Parameters{
+		Args: argparse.ArgsList{
+			"path": {
+				Desc:     "Initialization path",
+				Default:  ".",
+				Optional: false,
+			},
 		},
-		"mcver": {
-			Desc:     "Default Minecraft version",
-			Default:  "",
-			Optional: true,
-			Flag:     true,
-		},
-		"modtype": {
-			Desc:     "Default mod type (alpha, beta, release)",
-			Default:  "",
-			Optional: true,
-			Flag:     true,
+		Flags: argparse.FlagsList{
+			"mcver": {
+				Desc:     "Default Minecraft version",
+				Default:  "",
+				Optional: true,
+			},
+			"modtype": {
+				Desc:     "Default mod type (alpha, beta, release)",
+				Default:  "",
+				Optional: true,
+			},
 		},
 	},
 	Handler: handler,
