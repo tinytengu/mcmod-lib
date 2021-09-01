@@ -19,7 +19,7 @@ func (cmd *Command) Print() {
 }
 
 func (cmd *Command) PrintInline() {
-	fmt.Printf("%v - %v\n\n", cmd.Name, cmd.Desc)
+	fmt.Printf("%v - %v\n", cmd.Name, cmd.Desc)
 }
 
 func (cmd *Command) SprintInline() string {

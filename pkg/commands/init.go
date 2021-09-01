@@ -35,34 +35,31 @@ var InitCommand = command.Command{
 			},
 		},
 	},
-	Handler: handler,
-}
+	Handler: func(cmd command.Command, args argparse.ParseResult) {
+		initPath, _ := filepath.Abs(args.Args[0])
+		env := environment.NewEnvironment(initPath)
 
-// Command handler
-func handler(cmd command.Command, args argparse.ParseResult) {
-	initPath, _ := filepath.Abs(args.Args[0])
-	env := environment.NewEnvironment(initPath)
+		// Check if environment already exists
+		if utils.IsFileExists(env.GetConfigPath()) {
+			fmt.Printf("Modding environment in folder '%v' already exists\n", initPath)
+			return
+		}
 
-	// Check if environment already exists
-	if utils.IsFileExists(env.GetConfigPath()) {
-		fmt.Printf("Modding environment in folder '%v' already exists\n", initPath)
-		return
-	}
+		// Validate 'mcver' flag
+		env.Storage.Properties.ValidateFlag(
+			args.Flags, "mcver",
+			utils.IsValidMcVersion,
+			fmt.Sprintf("Invalid Minecraft version: %v\n", args.Flags["mcver"]),
+		)
 
-	// Validate 'mcver' flag
-	env.Storage.Properties.ValidateFlag(
-		args.Flags, "mcver",
-		utils.IsValidMcVersion,
-		fmt.Sprintf("Invalid Minecraft version: %v\n", args.Flags["mcver"]),
-	)
+		// Validate 'modtype' flag
+		env.Storage.Properties.ValidateFlag(
+			args.Flags, "modtype",
+			utils.IsValidModType,
+			fmt.Sprintf("Invalid mod type: %v\n", args.Flags["modtype"]),
+		)
 
-	// Validate 'modtype' flag
-	env.Storage.Properties.ValidateFlag(
-		args.Flags, "modtype",
-		utils.IsValidModType,
-		fmt.Sprintf("Invalid mod type: %v\n", args.Flags["modtype"]),
-	)
-
-	env.Write()
-	fmt.Printf("Modding environment initialized at '%v' folder\n", initPath)
+		env.Write()
+		fmt.Printf("Modding environment initialized at '%v' folder\n", initPath)
+	},
 }

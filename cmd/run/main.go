@@ -11,6 +11,7 @@ import (
 // Console commands list
 var commandsList = []command.Command{
 	commands.InitCommand,
+	commands.InstallCommand,
 }
 
 func main() {
