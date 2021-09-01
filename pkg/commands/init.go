@@ -47,19 +47,15 @@ func handler(cmd command.Command, args argparse.ParseResult) {
 		return
 	}
 
-	env.Storage.ValidateStringFlag(
-		args.Flags,
-		"mcver",
+	env.Storage.Properties.ValidateFlag(
+		args.Flags, "mcver",
 		utils.IsValidMcVersion,
-		env.Storage.Properties,
 		fmt.Sprintf("Invalid Minecraft version: %v\n", args.Flags["mcver"]),
 	)
 
-	env.Storage.ValidateStringFlag(
-		args.Flags,
-		"modtype",
+	env.Storage.Properties.ValidateFlag(
+		args.Flags, "modtype",
 		utils.IsValidModType,
-		env.Storage.Properties,
 		fmt.Sprintf("Invalid mod type: %v\n", args.Flags["modtype"]),
 	)
 
