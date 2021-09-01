@@ -14,12 +14,6 @@ type Environment struct {
 	Storage
 }
 
-type Storage struct {
-	Properties   PropertiesList `yaml:"properties"`
-	Repositories RepositoryList
-	Mods         []Mod `yaml:"mods"`
-}
-
 func NewEnvironment(dirPath string) Environment {
 	env := Environment{}
 

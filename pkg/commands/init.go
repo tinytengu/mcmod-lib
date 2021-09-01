@@ -1,3 +1,4 @@
+// 'init' command
 package commands
 
 import (
@@ -10,7 +11,6 @@ import (
 	"github.com/tinytengu/go-argparse"
 )
 
-// 'init' command
 var InitCommand = command.Command{
 	Name: "init",
 	Desc: "Initialize modding environment",

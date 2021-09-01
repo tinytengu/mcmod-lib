@@ -13,8 +13,6 @@ type Command struct {
 	Handler CommandHandler
 }
 
-type CommandHandler func(cmd Command, result argparse.ParseResult)
-
 func (cmd *Command) Print() {
 	fmt.Printf("%v - %v\n\n", cmd.Name, cmd.Desc)
 	argsSet := (argparse.ArgsSet{
