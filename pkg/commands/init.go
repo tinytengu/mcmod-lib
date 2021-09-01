@@ -1,4 +1,3 @@
-// 'init' command
 package commands
 
 import (
@@ -11,6 +10,7 @@ import (
 	"github.com/tinytengu/go-argparse"
 )
 
+// 'init' command
 var InitCommand = command.Command{
 	Name: "init",
 	Desc: "Initialize modding environment",
@@ -42,17 +42,20 @@ func handler(cmd command.Command, args argparse.ParseResult) {
 	initPath, _ := filepath.Abs(args.Args[0])
 	env := environment.NewEnvironment(initPath)
 
+	// Check if environment already exists
 	if utils.IsFileExists(env.GetConfigPath()) {
 		fmt.Printf("Modding environment in folder '%v' already exists\n", initPath)
 		return
 	}
 
+	// Validate 'mcver' flag
 	env.Storage.Properties.ValidateFlag(
 		args.Flags, "mcver",
 		utils.IsValidMcVersion,
 		fmt.Sprintf("Invalid Minecraft version: %v\n", args.Flags["mcver"]),
 	)
 
+	// Validate 'modtype' flag
 	env.Storage.Properties.ValidateFlag(
 		args.Flags, "modtype",
 		utils.IsValidModType,
@@ -60,5 +63,5 @@ func handler(cmd command.Command, args argparse.ParseResult) {
 	)
 
 	env.Write()
-	fmt.Printf("Modding environment initialized in '%v' folder\n", initPath)
+	fmt.Printf("Modding environment initialized at '%v' folder\n", initPath)
 }
