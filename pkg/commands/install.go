@@ -123,7 +123,7 @@ var InstallCommand = command.Command{
 			}
 			file := files[0]
 
-			fmt.Printf("Installing %v\n", mod.Title)
+			fmt.Printf("Installing '%v'\n", mod.Title)
 
 			// Delete old .jar file
 			modIdx, envMod := env.Mods.GetById(sel.Id)
@@ -159,6 +159,7 @@ var InstallCommand = command.Command{
 
 		// Write out changes
 		env.Write()
+
 		if installed == 0 {
 			fmt.Println("Unable to install required mods")
 		} else {
