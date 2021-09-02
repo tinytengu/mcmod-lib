@@ -128,7 +128,7 @@ var InstallCommand = command.Command{
 
 			// Download .jar file directly to the environment folder
 			cdn := file.GetCDN()
-			err = utils.DownloadFile(cdn, filepath.Join(envPath, file.Display))
+			err = utils.DownloadFile(cdn, filepath.Join(envPath, file.Name))
 			if err != nil {
 				fmt.Printf("Error (%v): %v\n", modId, err)
 				continue
@@ -140,14 +140,14 @@ var InstallCommand = command.Command{
 					Id:    modId,
 					Mcver: file.Version,
 					Type:  file.Type,
-					File:  file.Display,
+					File:  file.Name,
 				})
 			} else {
 				// Update mod environment properties
 				env.Mods[modIdx].Id = modId
 				env.Mods[modIdx].Mcver = file.Version
 				env.Mods[modIdx].Type = file.Type
-				env.Mods[modIdx].File = file.Display
+				env.Mods[modIdx].File = file.Name
 			}
 			installed++
 		}
