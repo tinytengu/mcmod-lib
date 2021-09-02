@@ -49,7 +49,7 @@ func FilterModFiles(mod cfapi.ApiResponse, sel ModSelector) []cfapi.ApiFile {
 			continue
 		}
 		expr := regexp.MustCompile(sel.File)
-		if !expr.MatchString(file.Display) {
+		if !expr.MatchString(file.Name) {
 			continue
 		}
 		files = append(files, file)
